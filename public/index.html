@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Viewport FIX -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>QuizForge Pro</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- QR Code -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-badge">Q</div>
+      <div>
+        <h1>QuizForge Pro</h1>
+        <p>Real-time multiplayer quiz platform</p>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <button id="themeToggle" class="icon-btn" title="Toggle theme">🌙</button>
+
+      <div id="profile" class="profile hidden">
+        <img id="profilePic" alt="Profile" />
+        <div class="profile-meta">
+          <span id="profileName">User</span>
+          <span id="profileRole">Player</span>
+        </div>
+        <button id="logout" class="danger-btn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+
+    <!-- AUTH -->
+    <section id="authBox" class="auth-wrap card">
+      <div class="section-head center">
+        <span class="mini-badge">Secure Access</span>
+        <h2>Login / Signup</h2>
+        <p>Enter your details to join the quiz platform</p>
+      </div>
+
+      <div class="form-grid">
+        <div class="input-wrap">
+          <label>Name</label>
+          <input id="name" type="text" placeholder="Your full name" />
+        </div>
+
+        <div class="input-wrap">
+          <label>Email</label>
+          <input id="email" type="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="input-wrap">
+          <label>Password</label>
+          <input id="password" type="password" placeholder="Enter password" />
+        </div>
+      </div>
+
+      <div class="btn-grid three">
+        <button id="signup" class="primary-btn">Sign Up</button>
+        <button id="login" class="secondary-btn">Login</button>
+        <button id="googleLogin" class="google-btn">Google Login</button>
+      </div>
+
+      <p id="authMsg" class="status-text"></p>
+    </section>
+
+    <!-- LOBBY -->
+    <section id="lobby" class="lobby-grid hidden">
+
+      <!-- HOST -->
+      <div class="card">
+        <div class="section-head">
+          <span class="mini-badge blue">Host Panel</span>
+          <h2>Create Quiz Room</h2>
+          <p>Host creates the room and controls the competition</p>
+        </div>
+
+        <div class="form-grid">
+          <div class="input-wrap">
+            <label>Subject</label>
+            <select id="subject">
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="C">C</option>
+              <option value="C++">C++</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="Data Structures">Data Structures</option>
+              <option value="Algorithms">Algorithms</option>
+              <option value="DBMS">DBMS</option>
+              <option value="Operating Systems">Operating Systems</option>
+              <option value="Computer Networks">Computer Networks</option>
+              <option value="Artificial Intelligence">Artificial Intelligence</option>
+              <option value="Machine Learning">Machine Learning</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Aptitude">Aptitude</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- FIXED -->
+          <div class="input-wrap hidden" id="customSubjectWrap">
+            <label>Custom Subject</label>
+            <input id="customSubject" type="text" placeholder="Enter custom subject" />
+          </div>
+
+          <div class="two-col">
+            <div class="input-wrap">
+              <label>Number of Questions</label>
+              <input id="count" type="number" min="1" max="100" value="10" />
+            </div>
+
+            <div class="input-wrap">
+              <label>Timer / Question</label>
+              <input id="duration" type="number" min="5" max="60" value="15" />
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-grid">
+          <button id="createRoom" class="primary-btn">Create Room</button>
+          <button id="startQuiz" class="secondary-btn hidden">Start Quiz</button>
+          <button id="pauseQuiz" class="ghost-btn hidden">Pause</button>
+          <button id="nextQuestion" class="ghost-btn hidden">Next Question</button>
+          <button id="endQuiz" class="danger-btn hidden">End Quiz</button>
+        </div>
+
+        <p id="lobbyStatus" class="status-text"></p>
+
+        <div id="hostRoomPanel" class="stats-panel hidden">
+          <div class="stat-box">
+            <span class="stat-label">Room Code</span>
+            <span id="roomCodeDisplay" class="stat-value">-</span>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">Status</span>
+            <span id="roomStatusText" class="stat-value">waiting</span>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">Participants</span>
+            <span id="participantCount" class="stat-value">0</span>
+          </div>
+
+          <div class="stat-box qr-box">
+            <span class="stat-label">Quick Join</span>
+            <canvas id="qrCanvas"></canvas>
+            <span class="stat-subtext">Scan to join room</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- JOIN -->
+      <div class="card">
+        <div class="section-head">
+          <span class="mini-badge purple">Players</span>
+          <h2>Join Room</h2>
+        </div>
+
+        <div class="input-wrap">
+          <label>Room Code</label>
+          <input id="joinCode" type="text" placeholder="Enter room code" />
+        </div>
+
+        <button id="joinRoom" class="primary-btn">Join Room</button>
+        <p id="joinMsg" class="status-text"></p>
+
+        <div id="participantListWrap" class="participant-wrap hidden">
+          <h3>Participants</h3>
+          <div id="participantList"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quizSection" class="quiz-layout hidden">
+      <div class="card quiz-card">
+        <div class="quiz-top">
+          <div class="quiz-chip" id="questionNumber">Question 1</div>
+          <div class="quiz-chip muted-chip" id="roomBadge">Room: -</div>
+        </div>
+
+        <div class="timer-wrap">
+          <div class="timer-bar">
+            <div id="timerFill"></div>
+          </div>
+          <span id="timerText">15s</span>
+        </div>
+
+        <h2 id="questionText">Question will appear here</h2>
+        <div id="optionsWrap" class="options-grid"></div>
+        <div id="feedbackText" class="feedback"></div>
+      </div>
+
+      <div class="card side-card">
+        <h3>Leaderboard</h3>
+        <div id="leaderboard"></div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section id="resultSection" class="hidden fade-in">
+      <div class="card result-card">
+
+        <h2>Quiz Finished</h2>
+
+        <div class="result-grid">
+          <div class="metric">
+            <span class="metric-label">Score</span>
+            <span id="finalScore" class="metric-value">0</span>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Rank</span>
+            <span id="finalRank" class="metric-value">#-</span>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Accuracy</span>
+            <span id="finalAccuracy" class="metric-value">0%</span>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Correct / Wrong:</span>
+            <span id="finalCW" class="metric-value">0 / 0</span>
+          </div>
+        </div>
+
+        <button id="backToLobby" class="primary-btn">Back to Lobby</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sounds -->
+  <audio id="correctSound" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3" type="audio/mpeg" />
+  </audio>
+
+  <audio id="wrongSound" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2020/2020-preview.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- FIXED SCRIPT -->
+  <script type="module" src="./script.js"></script>
+
+</body>
+</html>
