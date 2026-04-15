@@ -1,0 +1,282 @@
+/* BRAND */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.brand p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* CARD */
+.card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px;
+  padding: 26px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* AUTH */
+.auth-wrap {
+  max-width: 560px;
+  margin: 60px auto;
+}
+
+/* INPUT */
+input, select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.3);
+  color: white;
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(79,70,229,0.3);
+}
+
+/* BUTTON */
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: white;
+}
+
+.secondary-btn {
+  background: #334155;
+  color: white;
+}
+
+.google-btn {
+  background: #db4437;
+  color: white;
+}
+
+.danger-btn {
+  background: #ef4444;
+  color: white;
+}
+
+/* GRID */
+.btn-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.btn-grid.three {
+  grid-template-columns: repeat(3,1fr);
+}
+
+.form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.lobby-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.quiz-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 16px;
+}
+
+/* OPTIONS */
+.option-btn {
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.option-btn.selected {
+  border: 2px solid var(--primary);
+}
+
+/* HIDDEN */
+.hidden {
+  display: none;
+}
+/* ===== FINAL UI POLISH (SAFE) ===== */
+
+/* Smooth card feel */
+.card {
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+}
+
+/* Better button feel */
+button {
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.08);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+/* Primary button glow */
+.primary-btn {
+  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.35);
+}
+
+.primary-btn:hover {
+  box-shadow: 0 18px 45px rgba(79, 70, 229, 0.55);
+}
+
+/* Input polish */
+input,
+select {
+  transition: all 0.2s ease;
+}
+
+input:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+input:focus {
+  transform: scale(1.01);
+}
+
+/* Login card spacing fix */
+#authBox {
+  max-width: 520px;   /* PERFECT SIZE */
+  margin: 80px auto;  /* MORE CENTERED */
+}
+
+/* Title spacing */
+.section-head h2 {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+/* Subtitle */
+.section-head p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Buttons spacing */
+.btn-grid.three {
+  gap: 14px;
+}
+
+/* Smooth appearance */
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ===== DASHBOARD ===== */
+
+.dashboard {
+  margin-top: 30px;
+}
+
+.dashboard-top {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.dashboard-top input {
+  flex: 1;
+}
+
+/* GRID */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* CARDS */
+.quiz-cards {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 14px;
+}
+
+.quiz-card {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.quiz-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.1);
+}
+
+/* USER CARD */
+.user-card {
+  padding: 20px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  color: white;
+}

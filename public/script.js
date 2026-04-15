@@ -33,7 +33,7 @@ const firebaseConfig = {
   measurementId: "G-2XM8959J6B"
 };
 
-const OPENROUTER_API_KEY = "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";
+const OPENROUTER_API_KEY = ".env";
 const REVEAL_DELAY_MS = 5000;
 
 // ================= INIT =================
