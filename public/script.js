@@ -24,7 +24,7 @@ import {
 
 // ================= CONFIG =================
 const firebaseConfig = {
-  apiKey: "AIzaSyCAA8kjwhHBxhMJaUQI8iMY72hs1jk8wGo",
+  apiKey: "your api key",
   authDomain: "quiz-e1b86.firebaseapp.com",
   projectId: "quiz-e1b86",
   storageBucket: "quiz-e1b86.firebasestorage.app",
